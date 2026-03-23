@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rozcestník – meinkauf.wtf</title>
+  <meta name="description" content="Rozcestník Vítka Meinkaufa – Hero Hero, Sudety Culture, Kratomia, Kavamia a další.">
+  <meta property="og:title" content="Rozcestník – meinkauf.wtf">
+  <meta property="og:description" content="Rozcestník Vítka Meinkaufa – Hero Hero, Sudety Culture, Kratomia, Kavamia a další.">
+  <meta property="og:image" content="https://meinkauf.wtf/assets/rozcestnik-pc.png">
+  <meta property="og:url" content="https://meinkauf.wtf">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: auto; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      /* Obložení: barvy odebrané z hran obrázku */
+      background: linear-gradient(180deg, #0d7ee6 0%, #6a9fc2 20%, #9a8268 58%, #9d7e6f 100%);
+    }
+
+    .viewport {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    /* Rám – obrázek lehce vystoupí z pozadí */
+    .frame {
+      position: relative;
+      flex-shrink: 0;
+      border-radius: 6px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      pointer-events: none;
+      vertical-align: middle;
+    }
+
+    /* PC: 1024×575 – vejde se na obrazovku */
+    @media (min-width: 769px) {
+      .frame {
+        aspect-ratio: 1024 / 575;
+        max-width: 100vw;
+        max-height: 100vh;
+        width: min(100vw, calc(100vh * 1024 / 575));
+        height: auto;
+      }
+    }
+
+    /* Mobil: 576×1024, obložení nahoře a dole */
+    @media (max-width: 768px) {
+      body { padding: 6vh 0; }
+      .frame {
+        aspect-ratio: 576 / 1024;
+        max-height: 88vh;
+        width: auto;
+        max-width: 100%;
+      }
+      .frame img { width: 100%; height: auto; display: block; }
+    }
+
+    /* Odkazy – neviditelné, jen klikací oblasti */
+    .links-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .links-layer a {
+      position: absolute;
+      pointer-events: auto;
+      display: block;
+      text-indent: -9999px;
+      overflow: hidden;
+      text-decoration: none;
+      color: transparent;
+    }
+    .links-layer a:hover { outline: none; }
+    .links-layer a:focus-visible {
+      outline: 3px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
+    .links-layer a[href="#"] { cursor: default; }
+
+    /* ?debug=1 v URL zobrazí obrysy oblastí */
+    body.debug .links-layer a {
+      text-indent: 0;
+      outline: 2px solid rgba(200, 80, 80, 0.9);
+      color: rgba(40, 40, 40, 0.95);
+      font-size: clamp(10px, 2vw, 14px);
+    }
+
+    /* Pozice odkazů pro PC (1024×575) */
+    @media (min-width: 769px) {
+      .links-layer a[data-id="1"] { left: 47%; top: 15%; width: 12%; height: 9%; }
+      .links-layer a[data-id="2"] { left: 47%; top: 24%; width: 15%; height: 9%; }
+      .links-layer a[data-id="3"] { left: 47%; top: 33%; width: 14%; height: 9%; }
+      .links-layer a[data-id="4"] { left: 47%; top: 42%; width: 12%; height: 9%; }
+      .links-layer a[data-id="5"] { left: 47%; top: 51%; width: 12%; height: 9%; }
+      .links-layer a[data-id="6"] { left: 47%; top: 62%; width: 15%; height: 9%; }
+    }
+
+    /* Pozice odkazů pro mobil (576×1024) – left 46%, width 46%, height 9%, top ponechán */
+    @media (max-width: 768px) {
+      .links-layer a[data-id="1"] { left: 46%; top: 16%; width: 46%; height: 9%; }
+      .links-layer a[data-id="2"] { left: 46%; top: 27.2%; width: 46%; height: 9%; }
+      .links-layer a[data-id="3"] { left: 46%; top: 36.2%; width: 46%; height: 9%; }
+      .links-layer a[data-id="4"] { left: 46%; top: 45%; width: 46%; height: 9%; }
+      .links-layer a[data-id="5"] { left: 46%; top: 51%; width: 46%; height: 9%; }
+      .links-layer a[data-id="6"] { left: 46%; top: 62%; width: 46%; height: 9%; }
+    }
+
+    /* Funny animace při kliknutí na odkazy bez URL */
+    @keyframes wobble {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      15% { transform: translate(-8px, 2px) rotate(-1deg); }
+      30% { transform: translate(6px, -3px) rotate(1deg); }
+      45% { transform: translate(-4px, 4px) rotate(0.5deg); }
+      60% { transform: translate(5px, 2px) rotate(-0.5deg); }
+      75% { transform: translate(-3px, -2px) rotate(0deg); }
+    }
+    body.funny-wobble .frame { animation: wobble 0.6s ease-in-out; }
+    .funny-toast {
+      position: fixed;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.3);
+      background: rgba(30, 30, 30, 0.95);
+      color: #fff;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      font-size: clamp(14px, 2.5vw, 18px);
+      white-space: nowrap;
+      z-index: 9999;
+      opacity: 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transition: opacity 0.2s, transform 0.25s ease-out;
+    }
+    .funny-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <div class="frame">
+      <picture>
+        <source media="(max-width: 768px)" type="image/webp" srcset="assets/rozcestnik-phone.webp">
+        <source media="(max-width: 768px)" srcset="assets/rozcestnik-phone.png">
+        <source type="image/webp" srcset="assets/rozcestnik-pc.webp">
+        <img src="assets/rozcestnik-pc.png" alt="Rozcestník">
+      </picture>
+      <div class="links-layer" aria-hidden="true">
+        <!-- Odkazy se vykreslí z konfigurace níže -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (new URLSearchParams(location.search).get('debug') === '1') {
+      document.body.classList.add('debug');
+    }
+
+    function funnyClick(id) {
+      var messages = {
+        4: 'Moskva? Zatím jen na mapě. 🗺️',
+        5: 'Kavamia ještě neotevřela. Brzy! ☕🦥'
+      };
+      var msg = messages[id] || 'Brzy tady bude odkaz!';
+      document.body.classList.add('funny-wobble');
+      setTimeout(function () { document.body.classList.remove('funny-wobble'); }, 600);
+      var toast = document.querySelector('.funny-toast');
+      if (toast) toast.remove();
+      toast = document.createElement('div');
+      toast.className = 'funny-toast';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      requestAnimationFrame(function () { toast.classList.add('show'); });
+      setTimeout(function () {
+        toast.classList.remove('show');
+        setTimeout(function () { toast.remove(); }, 300);
+      }, 2200);
+    }
+
+    // ——— Konfigurace odkazů rozcestníku ———
+    // Nastavte URL u každé položky; prázdný řetězec = neklikatelná položka
+    const ROZCESTNIK_LINKS = [
+      { id: 1, label: 'Hero Hero',           url: 'https://herohero.co/vitkuvcestopiss' },
+      { id: 2, label: 'Sudety Culture',      url: 'https://www.sudetyculture.cz' },
+      { id: 3, label: 'Kratomia',           url: 'https://www.kratomia.cz/' },
+      { id: 4, label: 'Moskva',             url: '#' },
+      { id: 5, label: 'Kavamia',           url: '#' },
+      { id: 6, label: 'Vítek vysvětluje věci', url: 'https://www.youtube.com/@vitekvysvetlujeveci' },
+    ];
+
+    (function () {
+      const layer = document.querySelector('.links-layer');
+      ROZCESTNIK_LINKS.forEach(function (item) {
+        const a = document.createElement('a');
+        a.setAttribute('data-id', String(item.id));
+        a.textContent = item.label;
+        a.title = item.label;
+        if (item.url && item.url !== '#') {
+          a.href = item.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        } else {
+          a.href = '#';
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            funnyClick(Number(a.getAttribute('data-id')));
+          });
+        }
+        layer.appendChild(a);
+      });
+    })();
+  </script>
+</body>
+</html>
