@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rozcestník – meinkauf.wtf</title>
   <meta name="description" content="Rozcestník Vítka Meinkaufa – Hero Hero, Sudety Culture, Kratomia, Kavamia a další.">
-  <meta name="author" content="Vítek Meinkauf">
+  <meta name="author" content="vitkuvcestopiss">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://meinkauf.wtf">
+
+  <!-- Preload kritických obrázků (LCP) -->
+  <link rel="preload" as="image" href="assets/rozcestnik-pc.webp" type="image/webp" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="assets/rozcestnik-phone.webp" type="image/webp" media="(max-width: 768px)">
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, …) -->
   <meta property="og:type" content="website">
@@ -31,6 +35,22 @@
 
   <!-- Barva prohlížeče na mobilu -->
   <meta name="theme-color" content="#0d7ee6">
+
+  <!-- JSON-LD strukturovaná data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vítek Meinkauf",
+    "alternateName": "vitkuvcestopiss",
+    "url": "https://meinkauf.wtf",
+    "sameAs": [
+      "https://herohero.co/vitkuvcestopiss",
+      "https://www.sudetyculture.cz",
+      "https://www.youtube.com/@vitekvysvetlujeveci"
+    ]
+  }
+  </script>
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
   <style>
@@ -175,6 +195,22 @@
       opacity: 1;
       transform: translateX(-50%) scale(1);
     }
+
+    /* Noscript fallback */
+    .noscript-links {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+    }
+    .noscript-links a {
+      color: #fff;
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
   </style>
 </head>
 <body>
@@ -184,11 +220,23 @@
         <source media="(max-width: 768px)" type="image/webp" srcset="assets/rozcestnik-phone.webp">
         <source media="(max-width: 768px)" srcset="assets/rozcestnik-phone.png">
         <source type="image/webp" srcset="assets/rozcestnik-pc.webp">
-        <img src="assets/rozcestnik-pc.png" alt="Rozcestník">
+        <img src="assets/rozcestnik-pc.png" alt="Rozcestník Vítka Meinkaufa"
+             fetchpriority="high" decoding="async">
       </picture>
-      <div class="links-layer" aria-hidden="true">
-        <!-- Odkazy se vykreslí z konfigurace níže -->
-      </div>
+
+      <!-- Klikací oblasti generované JS -->
+      <nav class="links-layer" aria-label="Rozcestník">
+      </nav>
+
+      <!-- Fallback bez JavaScriptu -->
+      <noscript>
+        <nav class="noscript-links" aria-label="Rozcestník">
+          <a href="https://herohero.co/vitkuvcestopiss" target="_blank" rel="noopener noreferrer">Hero Hero</a>
+          <a href="https://www.sudetyculture.cz" target="_blank" rel="noopener noreferrer">Sudety Culture</a>
+          <a href="https://www.kratomia.cz/" target="_blank" rel="noopener noreferrer">Kratomia</a>
+          <a href="https://www.youtube.com/@vitekvysvetlujeveci" target="_blank" rel="noopener noreferrer">Vítek vysvětluje věci</a>
+        </nav>
+      </noscript>
     </div>
   </div>
 
@@ -219,13 +267,13 @@
     }
 
     // ——— Konfigurace odkazů rozcestníku ———
-    // Nastavte URL u každé položky; prázdný řetězec = neklikatelná položka
+    // Nastavte URL u každé položky; '#' = odkaz zatím neexistuje
     const ROZCESTNIK_LINKS = [
-      { id: 1, label: 'Hero Hero',           url: 'https://herohero.co/vitkuvcestopiss' },
-      { id: 2, label: 'Sudety Culture',      url: 'https://www.sudetyculture.cz' },
-      { id: 3, label: 'Kratomia',           url: 'https://www.kratomia.cz/' },
-      { id: 4, label: 'Moskva',             url: '#' },
-      { id: 5, label: 'Kavamia',           url: '#' },
+      { id: 1, label: 'Hero Hero',             url: 'https://herohero.co/vitkuvcestopiss' },
+      { id: 2, label: 'Sudety Culture',        url: 'https://www.sudetyculture.cz' },
+      { id: 3, label: 'Kratomia',              url: 'https://www.kratomia.cz/' },
+      { id: 4, label: 'Moskva',                url: '#' },
+      { id: 5, label: 'Kavamia',               url: '#' },
       { id: 6, label: 'Vítek vysvětluje věci', url: 'https://www.youtube.com/@vitekvysvetlujeveci' },
     ];
 
