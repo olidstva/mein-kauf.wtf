@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zabloudil jsi – meinkauf.wtf</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0d7ee6">
+  <!-- Za 10 s zpátky na rozcestník -->
+  <meta http-equiv="refresh" content="10; url=/">
+  <!-- Absolutní cesty: 404 se servíruje i na vnořených URL (/neco/jineho) -->
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      color: #fff;
+      text-align: center;
+      /* Stejné obložení jako na rozcestníku */
+      background: linear-gradient(180deg, #0d7ee6 0%, #6a9fc2 20%, #9a8268 58%, #9d7e6f 100%);
+    }
+    .card {
+      max-width: 28rem;
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+      background: rgba(30, 30, 30, 0.35);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+    .emoji { font-size: 4rem; line-height: 1; }
+    h1 { margin: 1rem 0 0.5rem; font-size: clamp(1.5rem, 6vw, 2rem); }
+    p { margin-bottom: 1.5rem; opacity: 0.9; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+    a {
+      display: inline-block;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      background: #fff;
+      color: #0d4f8f;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a:hover { background: #f0f0f0; }
+    a:focus-visible { outline: 3px solid rgba(255, 255, 255, 0.85); outline-offset: 3px; }
+    small { display: block; margin-top: 1rem; opacity: 0.7; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="emoji" aria-hidden="true">🍄🗺️</div>
+    <h1>Tahle cesta nikam nevede</h1>
+    <p>Na téhle ceduli nic není. Možná jsi odbočil o houbu dřív.</p>
+    <a href="/">Zpátky na rozcestník</a>
+    <small>Za 10 vteřin tě tam vrátíme sami.</small>
+  </main>
+</body>
+</html>
