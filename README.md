@@ -48,12 +48,22 @@ Do `assets/` patří:
 
 | Soubor | Použití |
 |--------|---------|
-| `rozcestnik-pc.webp` | Desktop (primární, WebP) |
-| `rozcestnik-pc.png` | Desktop (fallback) |
-| `rozcestnik-phone.webp` | Mobil (primární, WebP) |
-| `rozcestnik-phone.png` | Mobil (fallback) |
+| `rozcestnik-pc.webp` | Desktop (primární, WebP, 2048×1150) |
+| `rozcestnik-pc.jpg` | Desktop (fallback, JPEG) |
+| `rozcestnik-phone.webp` | Mobil (primární, WebP, 1152×2048) |
+| `rozcestnik-phone.jpg` | Mobil (fallback, JPEG) |
+| `og-image.jpg` | Náhled pro sociální sítě (1200×630) |
+| `apple-touch-icon.png` | Ikona na plochu iOS (180×180) |
 
-Po výměně obrázku zkontroluj pozice odkazů v CSS (sekce `/* Pozice odkazů */`) pomocí debug módu.
+Fallbacky a náhled vygeneruješ z WebP (macOS):
+
+```bash
+sips -s format jpeg -s formatOptions 82 assets/rozcestnik-pc.webp --out assets/rozcestnik-pc.jpg
+sips -s format jpeg -s formatOptions 82 -Z 1200 assets/rozcestnik-pc.webp --out assets/og-image.jpg
+sips --cropToHeightWidth 630 1200 assets/og-image.jpg
+```
+
+Po výměně obrázku zkontroluj pozice odkazů v CSS (sekce `/* Pozice odkazů */`) pomocí debug módu — na desktopu i v mobilní šířce.
 
 ## Deploy
 

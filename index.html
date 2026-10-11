@@ -18,9 +18,10 @@
   <meta property="og:url" content="https://meinkauf.wtf">
   <meta property="og:title" content="Rozcestník – meinkauf.wtf">
   <meta property="og:description" content="Rozcestník Vítka Meinkaufa – Hero Hero, Sudety Culture, Kratomia, Kavamia a další.">
-  <meta property="og:image" content="https://meinkauf.wtf/assets/rozcestnik-pc.png">
-  <meta property="og:image:width" content="1024">
-  <meta property="og:image:height" content="575">
+  <meta property="og:image" content="https://meinkauf.wtf/assets/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Rozcestník meinkauf.wtf">
   <meta property="og:locale" content="cs_CZ">
   <meta property="og:site_name" content="meinkauf.wtf">
@@ -30,7 +31,7 @@
   <meta name="twitter:url" content="https://meinkauf.wtf">
   <meta name="twitter:title" content="Rozcestník – meinkauf.wtf">
   <meta name="twitter:description" content="Rozcestník Vítka Meinkaufa – Hero Hero, Sudety Culture, Kratomia, Kavamia a další.">
-  <meta name="twitter:image" content="https://meinkauf.wtf/assets/rozcestnik-pc.png">
+  <meta name="twitter:image" content="https://meinkauf.wtf/assets/og-image.jpg">
   <meta name="twitter:image:alt" content="Rozcestník meinkauf.wtf">
 
   <!-- Barva prohlížeče na mobilu -->
@@ -52,6 +53,7 @@
   }
   </script>
 
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -147,22 +149,22 @@
 
     /* Pozice odkazů pro PC (1024×575) */
     @media (min-width: 769px) {
-      .links-layer a[data-id="1"] { left: 47%; top: 15%; width: 12%; height: 9%; }
-      .links-layer a[data-id="2"] { left: 47%; top: 24%; width: 15%; height: 9%; }
-      .links-layer a[data-id="3"] { left: 47%; top: 33%; width: 14%; height: 9%; }
-      .links-layer a[data-id="4"] { left: 47%; top: 42%; width: 12%; height: 9%; }
-      .links-layer a[data-id="5"] { left: 47%; top: 51%; width: 12%; height: 9%; }
-      .links-layer a[data-id="6"] { left: 47%; top: 62%; width: 15%; height: 9%; }
+      .links-layer a[data-id="1"] { left: 43%; top: 16.8%; width: 13.6%; height: 7.3%; }
+      .links-layer a[data-id="2"] { left: 43%; top: 24.3%; width: 13.6%; height: 9.7%; }
+      .links-layer a[data-id="3"] { left: 43%; top: 35.2%; width: 13.6%; height: 7%; }
+      .links-layer a[data-id="4"] { left: 43%; top: 44.1%; width: 13.6%; height: 7.2%; }
+      .links-layer a[data-id="5"] { left: 43%; top: 51.5%; width: 13.6%; height: 9.8%; }
+      .links-layer a[data-id="6"] { left: 43%; top: 62.6%; width: 13.6%; height: 6.8%; }
     }
 
-    /* Pozice odkazů pro mobil (576×1024) – left 46%, width 46%, height 9%, top ponechán */
+    /* Pozice odkazů pro mobil (576×1024) – oblasti se nesmí překrývat */
     @media (max-width: 768px) {
-      .links-layer a[data-id="1"] { left: 46%; top: 16%; width: 46%; height: 9%; }
-      .links-layer a[data-id="2"] { left: 46%; top: 27.2%; width: 46%; height: 9%; }
-      .links-layer a[data-id="3"] { left: 46%; top: 36.2%; width: 46%; height: 9%; }
-      .links-layer a[data-id="4"] { left: 46%; top: 45%; width: 46%; height: 9%; }
-      .links-layer a[data-id="5"] { left: 46%; top: 51%; width: 46%; height: 9%; }
-      .links-layer a[data-id="6"] { left: 46%; top: 62%; width: 46%; height: 9%; }
+      .links-layer a[data-id="1"] { left: 46%; top: 16.5%; width: 46%; height: 8%; }
+      .links-layer a[data-id="2"] { left: 46%; top: 24.8%; width: 46%; height: 9.5%; }
+      .links-layer a[data-id="3"] { left: 46%; top: 36%; width: 46%; height: 8%; }
+      .links-layer a[data-id="4"] { left: 46%; top: 45.5%; width: 46%; height: 8%; }
+      .links-layer a[data-id="5"] { left: 46%; top: 53.8%; width: 46%; height: 9.5%; }
+      .links-layer a[data-id="6"] { left: 46%; top: 65%; width: 46%; height: 7.8%; }
     }
 
     /* Funny animace při kliknutí na odkazy bez URL */
@@ -185,7 +187,8 @@
       padding: 0.8rem 1.4rem;
       border-radius: 999px;
       font-size: clamp(14px, 2.5vw, 18px);
-      white-space: nowrap;
+      max-width: calc(100vw - 32px);
+      text-align: center;
       z-index: 9999;
       opacity: 0;
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
@@ -218,9 +221,9 @@
     <div class="frame">
       <picture>
         <source media="(max-width: 768px)" type="image/webp" srcset="assets/rozcestnik-phone.webp">
-        <source media="(max-width: 768px)" srcset="assets/rozcestnik-phone.png">
+        <source media="(max-width: 768px)" srcset="assets/rozcestnik-phone.jpg">
         <source type="image/webp" srcset="assets/rozcestnik-pc.webp">
-        <img src="assets/rozcestnik-pc.png" alt="Rozcestník Vítka Meinkaufa"
+        <img src="assets/rozcestnik-pc.jpg" alt="Rozcestník Vítka Meinkaufa"
              fetchpriority="high" decoding="async">
       </picture>
 
